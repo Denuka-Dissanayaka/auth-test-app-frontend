@@ -18,6 +18,9 @@ export const LoginUser = createAsyncThunk(
         {
           username: user.username,
           password: user.password,
+        },
+        {
+          withCredentials: true, // if you need to send cookies or auth headers
         }
       );
       localStorage.setItem("token", response.data.token);
@@ -39,6 +42,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
         headers: {
           "access-token": localStorage.getItem("token"),
         },
+        withCredentials: true,
       }
     );
     return response.data;

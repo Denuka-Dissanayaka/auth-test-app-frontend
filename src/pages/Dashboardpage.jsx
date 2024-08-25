@@ -21,7 +21,7 @@ function Dashboardpage() {
   return (
     <Layer>
       <div>
-        <h1>Dashboard</h1>
+        <h1>Dashboard page</h1>
         <p>{user && user.username}</p>
         <p>{user && user.email}</p>
       </div>
