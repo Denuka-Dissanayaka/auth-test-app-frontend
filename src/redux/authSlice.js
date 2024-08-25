@@ -13,10 +13,13 @@ export const LoginUser = createAsyncThunk(
   "user/LoginUser",
   async (user, thunkAPI) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/v1/login`, {
-        username: user.username,
-        password: user.password,
-      });
+      const response = await axios.post(
+        `https://auth-test-app-backend-production.up.railway.app/api/v1/login`,
+        {
+          username: user.username,
+          password: user.password,
+        }
+      );
       localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
@@ -30,11 +33,14 @@ export const LoginUser = createAsyncThunk(
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/v1/me`, {
-      headers: {
-        "access-token": localStorage.getItem("token"),
-      },
-    });
+    const response = await axios.get(
+      `https://auth-test-app-backend-production.up.railway.app/api/v1/me`,
+      {
+        headers: {
+          "access-token": localStorage.getItem("token"),
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -45,7 +51,9 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const LogOut = createAsyncThunk("user/LogOut", async () => {
-  await axios.delete(`http://localhost:5000/api/v1/logout`);
+  await axios.delete(
+    `https://auth-test-app-backend-production.up.railway.app/api/v1/logout`
+  );
 });
 
 export const authSlice = createSlice({
